@@ -1,0 +1,33 @@
+{% load static %}
+<section class="widget post-right-item">
+    <h4 class="post-right-title">热门推荐</h4>
+    <ul class="post-hot clearfix">
+        {% for k in right_hot %}
+            <li>
+                <div class="img">
+                <a href="{% url 'index' %}show-{{ k.id }}.html" title="{{ k.title }}">
+                <img src="{% url 'index' %}media/{{ k.img }}"
+                 srcset="{% url 'index' %}media/{{ k.img }}" alt="{{ k.title }}"
+                    class="wp-post-image" width="120" height="80"/>
+                </a>
+                </div>
+                <div class="text">
+                <a href="{% url 'index' %}show-{{ k.id }}.html" title="{{ k.title }}"
+                           target="_blank">{{ k.title }}</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</section>
+
+</section>
+<section class="widget post-right-item"><h4 class="post-right-title">所有标签</h4>
+    <div class="tags">
+        {% for tag in tags %}
+            <a href="{% url 'index' %}tag/{{ tag.name }}">{{ tag.name }}</a>
+        {% endfor %}
+    </div>
+</section>
+</section><!-- /关注我们 -->
+{% include 'contact.html' %}
+

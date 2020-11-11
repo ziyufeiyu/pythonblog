@@ -59,7 +59,7 @@ class Article(models.Model):
                         upload_settings={"imageMaxSize": 1204000},
                         settings={}, command=None, blank=True
                         )
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='作者')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1, verbose_name='作者')
     """
     文章作者，这里User是从django.contrib.auth.models导入的。
     这里我们通过 ForeignKey 把文章和 User 关联了起来。

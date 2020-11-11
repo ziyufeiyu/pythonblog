@@ -54,9 +54,9 @@
                     <li>
                      <div class="pic">
                        <a href="{% url 'index' %}show-{{ h.id }}.html" title="{{ h.title }}">
-                       <img src="{{ media_prefix }}media/{{ h.img }}"
-                         srcset="{{ media_prefix }}media/{{ h.img }}"
-                         alt="{{ h.title }}" class="wp-post-image" width="145" height="100"/></a>
+                       <img src="{{ media_prefix }}{{ h.img }}"
+                         srcset="{{ media_prefix }}{{ h.img }}"
+                         alt="{{ h.title }}" class="wp-post-image" width="80" height="60"/></a>
                       </div>
                         <a class="descript " href="{% url 'index' %}show-{{ h.id }}.html" rel="bookmark"
                                title="{{ h.title }}">{{ h.title }}</a>

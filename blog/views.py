@@ -20,7 +20,7 @@ def global_variable(request):
 def index(request):
     banner = Banner.objects.filter(is_active=True)[0:4]  # 查询所有幻灯图数据，并进行切片
     recommend = Article.objects.filter(recommend__id=1)[:3]  # 查询推荐位ID为1的文章
-    allarticle = Article.objects.all().order_by('-id')[0:10]
+    allarticle = Article.objects.all().order_by('-id')[0:8]
     hot = Article.objects.all().order_by('views')[:10]  # 通过浏览数进行排序
     right_hot = Article.objects.filter(recommend__id=2)[:6]
     link = Link.objects.all()
@@ -54,7 +54,7 @@ def list(request,lid):
 #内容页
 def show(request,sid):
     show = Article.objects.get(id=sid)#查询指定ID的文章
-    hot = Article.objects.all().order_by('?')[:10]#内容下面的您可能感兴趣的文章，随机推荐
+    hot = Article.objects.all().order_by('?')[:5]#内容下面的您可能感兴趣的文章，随机推荐
     previous_blog = Article.objects.filter(created_time__gt=show.created_time,category=show.category.id).first()
     netx_blog = Article.objects.filter(created_time__lt=show.created_time,category=show.category.id).last()
     show.views = show.views + 1

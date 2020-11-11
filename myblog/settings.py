@@ -86,8 +86,8 @@ DATABASES = {
     #},
     'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'python_blog',
-            'USER': 'user_nmghssc',
+            'NAME': 'blog',
+            'USER': 'root',
             'PASSWORD': '@wdsr0301',
             'HOST': '127.0.0.1',
             'PORT': '3306',
@@ -134,13 +134,16 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # 这个是设置静态文件夹目录的路径
+# STATICFILES_DIRS = (
+#   '/usr/local/lib/python3.6/site-packages/django/contrib/admin/static/',
+# )
 STATICFILES_DIRS = (
-  '/usr/local/lib/python3.6/site-packages/django/contrib/admin/static/',
+    os.path.join(BASE_DIR, 'static'),
 )
 # 设置文件上传路径，图片上传、文件上传都会存放在此目录里
 # MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 QINIU_ACCESS_KEY = 'M1zsoODbeIyUiWO4lLyrF03i6SK-iZpp_abNSn6I'
 QINIU_SECRET_KEY = '0R3_4LMbUxnXwEPKHUggOSRIZy60GxgPKp9E2qpa'

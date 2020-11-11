@@ -20,8 +20,8 @@ def global_variable(request):
 def index(request):
     banner = Banner.objects.filter(is_active=True)[0:4]  # 查询所有幻灯图数据，并进行切片
     recommend = Article.objects.filter(recommend__id=1)[:3]  # 查询推荐位ID为1的文章
-    allarticle = Article.objects.all().order_by('-id')[0:8]
-    hot = Article.objects.all().order_by('views')[:10]  # 通过浏览数进行排序
+    allarticle = Article.objects.all().order_by('-id')[:6]
+    hot = Article.objects.all().order_by('views')[:6]  # 通过浏览数进行排序
     right_hot = Article.objects.filter(recommend__id=2)[:6]
     link = Link.objects.all()
     # 把查询出来的分类封装到上下文里

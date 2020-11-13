@@ -11,3 +11,6 @@ media/
 myblog/__pycache__/
 venv/
 myblog/settings.py
+myblog.log
+static/admin/
+static/ueditor/

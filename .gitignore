@@ -1,0 +1,13 @@
+.idea/.gitignore
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/pythonblog.iml
+.idea/vcs.xml
+DjangoUeditor/__pycache__/
+blog/__pycache__/
+blog/migrations/__pycache__/
+media/
+myblog/__pycache__/
+venv/
+myblog/settings.py

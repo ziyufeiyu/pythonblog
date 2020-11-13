@@ -47,10 +47,10 @@ class Recommend(models.Model):
 # 文章
 class Article(models.Model):
     title = models.CharField('标题', max_length=70)
-    summary = models.TextField('摘要', max_length=200, blank=True)
+    summary = models.TextField('摘要', max_length=200, blank=False)
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, verbose_name='分类', blank=True, null=True)
     # 使用外键关联分类表与分类是一对多关系
-    tags = models.ManyToManyField(Tag, verbose_name='标签', blank=True)
+    tags = models.ManyToManyField(Tag, verbose_name='标签', blank=True, null=True)
     # 使用外键关联标签表与标签是多对多关系
     img = models.ImageField(upload_to='article_img/%Y/%m/%d/', verbose_name='文章图片', blank=True, null=True)
     # body = models.TextField()

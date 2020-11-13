@@ -6,8 +6,10 @@ from django.http import HttpResponse
 from .models import Category, Banner, Article, Tag, Link
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+
 def hello(request):
     return HttpResponse('欢迎使用Django！')
+
 
 def global_variable(request):
     allcategory = Category.objects.all()
@@ -15,6 +17,7 @@ def global_variable(request):
     tags = Tag.objects.all()
     media_prefix = settings.MEDIA_URL
     return locals()
+
 
 # 首页
 def index(request):
@@ -35,13 +38,15 @@ def index(request):
     }
     return render(request, 'index.html', locals())
 
-#列表页
+
+#  列表页
 def list(request,lid):
     list = Article.objects.filter(category_id=lid)#获取通过URL传进来的lid，然后筛选出对应文章
     cname = Category.objects.get(id=lid)#获取当前文章的栏目名
     recommend = Article.objects.filter(recommend__id=2)[:6]#右侧的热门推荐
     page = request.GET.get('page')  # 在URL中获取当前页面数
     paginator = Paginator(list, 5)  # 对查询到的数据对象list进行分页，设置超过5条数据就分页
+    link = Link.objects.all()
     try:
         list = paginator.page(page)  # 获取当前页码的记录
     except PageNotAnInteger:
@@ -51,7 +56,8 @@ def list(request,lid):
 
     return render(request, 'list.html', locals())
 
-#内容页
+
+# 内容页
 def show(request,sid):
     show = Article.objects.get(id=sid)#查询指定ID的文章
     hot = Article.objects.all().order_by('?')[:5]#内容下面的您可能感兴趣的文章，随机推荐
@@ -60,7 +66,9 @@ def show(request,sid):
     show.views = show.views + 1
     show.save()
     return render(request, 'show.html', locals())
-#标签页
+
+
+# 标签页
 def tag(request, tag):
     list = Article.objects.filter(tags__name=tag)#通过文章标签进行查询文章
     remen = Article.objects.filter(recommend__id=2)[:6]
@@ -76,6 +84,7 @@ def tag(request, tag):
     except EmptyPage:
         list = paginator.page(paginator.num_pages)  # 如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
     return render(request, 'tags.html', locals())
+
 
 # 搜索页
 def search(request):
@@ -93,9 +102,11 @@ def search(request):
     except EmptyPage:
         list = paginator.page(paginator.num_pages)  # 如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
     return render(request, 'search.html', locals())
+
+
 # 关于我们
 def about(request):
     allcategory = Category.objects.all()
-    return render(request, 'page.html',locals())
+    return render(request, 'page.html', locals())
 
 

@@ -14,6 +14,8 @@ import datetime
 from django.http import HttpResponse
 from . import settings as USettings
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
+import six
 
 
 def get_path_format_vars():
@@ -38,6 +40,43 @@ def save_upload_file(PostFile, FilePath):
         return u"写入文件错误:%s" % e
     f.close()
     return u"SUCCESS"
+
+
+def get_qiniu_config(name, default=None):
+    """
+    Get configuration variable from environment variable
+    or django setting.py
+    """
+    config = os.environ.get(name, getattr(settings, name, default))
+    if config is not None:
+        if isinstance(config, six.string_types):
+            return config.strip()
+        else:
+            return config
+    else:
+        raise ImproperlyConfigured(
+            "Can't find config for '%s' either in environment"
+            "variable or in setting.py" % name)
+
+
+#  保存上传文件到七牛
+def save_upload_file_to_qiniu(upload_file,key):
+    access_key = get_qiniu_config('QINIU_ACCESS_KEY')
+    secret_key = get_qiniu_config('QINIU_SECRET_KEY')
+    bucket_name = get_qiniu_config('QINIU_BUCKET_NAME')
+
+    try:
+        from qiniu import Auth, put_file, put_data
+        q = Auth(access_key, secret_key)
+        token = q.upload_token(bucket_name, key)
+        # ret, info = put_file(token, key, upload_file)
+        ret, info = put_data(token, key, upload_file)
+        if ret.get('key', None) is None:
+            raise Exception('upload error')
+        else:
+            return u"SUCCESS"
+    except Exception:
+        return u"upload error"
 
 
 @csrf_exempt
@@ -208,8 +247,8 @@ def UploadFile(request):
             state = save_scrawl_file(request, os.path.join(OutputPath, OutputFile))
         else:
             # 保存到文件中，如果保存错误，需要返回ERROR
-            state = save_upload_file(file, os.path.join(OutputPath, OutputFile))
-
+            # state = save_upload_file(file, os.path.join(OutputPath, OutputFile))
+            state = save_upload_file_to_qiniu(file, OutputPathFormat)
     # 返回数据
     return_info = {
         # 保存后的文件名称

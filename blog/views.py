@@ -45,7 +45,7 @@ def list(request,lid):
     cname = Category.objects.get(id=lid)#获取当前文章的栏目名
     recommend = Article.objects.filter(recommend__id=2)[:6]#右侧的热门推荐
     page = request.GET.get('page')  # 在URL中获取当前页面数
-    paginator = Paginator(list, 5)  # 对查询到的数据对象list进行分页，设置超过5条数据就分页
+    paginator = Paginator(list, 8)  # 对查询到的数据对象list进行分页，设置超过5条数据就分页
     link = Link.objects.all()
     try:
         list = paginator.page(page)  # 获取当前页码的记录

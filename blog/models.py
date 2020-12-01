@@ -3,9 +3,10 @@ from django.db import models
 # Create your models here.
 from django.db import models
 from django.contrib.auth.models import User
-from DjangoUeditor.models import UEditorField #头部增加这行代码导入UEditorField
+from DjangoUeditor.models import UEditorField  # 头部增加这行代码导入UEditorField
 
 # 导入Django自带用户模块
+
 
 # 文章分类
 class Category(models.Model):

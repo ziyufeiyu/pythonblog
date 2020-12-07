@@ -58,9 +58,9 @@ def list(request,lid):
 
 
 # 内容页
-def show(request,sid):
-    show = Article.objects.get(id=sid)#查询指定ID的文章
-    hot = Article.objects.all().order_by('?')[:5]#内容下面的您可能感兴趣的文章，随机推荐
+def show(request, sid):
+    show = Article.objects.get(id=sid)  # 查询指定ID的文章
+    hot = Article.objects.all().order_by('?')[:5]  # 内容下面的您可能感兴趣的文章，随机推荐
     previous_blog = Article.objects.filter(created_time__gt=show.created_time,category=show.category.id).first()
     netx_blog = Article.objects.filter(created_time__lt=show.created_time,category=show.category.id).last()
     show.views = show.views + 1
@@ -70,10 +70,10 @@ def show(request,sid):
 
 # 标签页
 def tag(request, tag):
-    list = Article.objects.filter(tags__name=tag)#通过文章标签进行查询文章
+    list = Article.objects.filter(tags__name=tag)  # 通过文章标签进行查询文章
     remen = Article.objects.filter(recommend__id=2)[:6]
     allcategory = Category.objects.all()
-    tname = Tag.objects.get(name=tag)#获取当前搜索的标签名
+    tname = Tag.objects.get(name=tag)  # 获取当前搜索的标签名
     page = request.GET.get('page')
     tags = Tag.objects.all()
     paginator = Paginator(list, 5)

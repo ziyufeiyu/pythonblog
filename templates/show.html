@@ -13,7 +13,7 @@
                        <span class="item">分类：<a href="{% url 'index' %}list-{{ show.category.id }}.html" rel="category tag">{{ show.category.name }}</a></span>
                         <span class="item">作者：{{ show.user }}</span>
                         <span class="item">浏览：{{ show.views }}</span>
-                        <span class="item">{{ show.created_time }}</span>
+                        <span class="item">{{ show.modified_time }}</span>
                     </div>
                     <article class="article-content">
                         {{ show.body|safe }}

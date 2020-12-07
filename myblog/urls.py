@@ -22,8 +22,8 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello/', views.hello),   # +
-    path('ueditor/', include('DjangoUeditor.urls')), #添加DjangoUeditor的URL
-    re_path('^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),#增加此行
+    path('ueditor/', include('DjangoUeditor.urls')),  # 添加DjangoUeditor的URL
+    re_path('^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),  # 增加此行
     re_path('^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 
     path('', views.index, name='index'),  # 网站首页

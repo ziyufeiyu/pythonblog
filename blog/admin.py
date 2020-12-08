@@ -23,23 +23,29 @@ class ArticleAdmin(admin.ModelAdmin):
 @admin.register(Banner)
 class BannerAdmin(admin.ModelAdmin):
     list_display = ('id', 'text_info', 'img', 'link_url', 'is_active')
+    list_editable = ['text_info', 'link_url']
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'index')
+    list_editable = ['name', 'index']
 
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
+    list_editable = ['name']
 
 
 @admin.register(Recommend)
 class TuiAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
+    list_editable = ['name']
+
 
 
 @admin.register(Link)
 class LinkAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'linkurl')
+    list_editable = ['name', 'linkurl']

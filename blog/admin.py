@@ -9,6 +9,8 @@ from .models import Banner, Category, Tag, Recommend, Article, Link
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('id', 'category', 'title', 'recommend', 'user', 'views', 'modified_time')
     exclude = ('summary',)
+    search_fields = ('title',)  # 指定要搜索的字段，将会出现一个搜索框让管理员搜索关键词
+    list_filter = ('modified_time', 'category')  # 指定列表过滤器，右边将会出现一个快捷的日期过滤选项，
     # 文章列表里显示想要显示的字段
     list_per_page = 50
     # 满50条数据就自动分页

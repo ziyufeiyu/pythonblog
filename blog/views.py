@@ -12,7 +12,7 @@ def hello(request):
 
 
 def global_variable(request):
-    allcategory = Category.objects.all()
+    allcategory = Category.objects.all().order_by("index")
     remen = Article.objects.filter(recommend__id=2).order_by('modified_time')[:6]
     tags = Tag.objects.all()
     media_prefix = settings.MEDIA_URL
